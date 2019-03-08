@@ -13,7 +13,7 @@ test:
 	docker run $(IMAGE)
 
 image:
-	arg := `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
+	arg := "$(filter-out $@,$(MAKECMDGOALS))"
 	echo $(arg)
 	VERSION := $(arg)
 	docker build -t $(IMAGE):$(VERSION) $(DOCKER_FILE)
