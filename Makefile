@@ -4,15 +4,13 @@ VERSION := latest
 
 DOCKER_FILE := .
 
-BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
-HASH := $(shell git rev-parse HEAD)
-
 IMAGE := $(REPOSITORY_NAME)/$(SERVICE_NAME)
 
+%:
+    @:
+
 all:
-	ifneq ($(BRANCH), "master")
-		VERSION := $(BRANCH)
-	endif
+	VERSION := `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
 
 test:
 	docker run $(IMAGE)
