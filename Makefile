@@ -13,7 +13,7 @@ test:
 	docker run $(IMAGE)
 
 image:
-	docker build -t $(IMAGE):"$(filter-out $@,$(MAKECMDGOALS))" $(DOCKER_FILE)
+	docker build -t $(IMAGE):$(filter-out $@,$(MAKECMDGOALS)) $(DOCKER_FILE)
 
 push-image:
 	docker push $(IMAGE)
