@@ -4,12 +4,15 @@ VERSION := latest
 
 DOCKER_FILE := .
 
+BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+HASH := $(shell git rev-parse HEAD)
+
 IMAGE := $(REPOSITORY_NAME)/$(SERVICE_NAME)
 
 all:
-    @if [ "$(TRAVIS_BRANCH)" != "master" ]; then\
-        VERSION := $(TRAVIS_BRANCH)
-    fi
+	ifneq ($(BRANCH), "master")
+		VERSION := $(BRANCH)
+	endif
 
 test:
 	docker run $(IMAGE)
