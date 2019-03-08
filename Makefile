@@ -9,7 +9,7 @@ IMAGE := $(REPOSITORY_NAME)/$(SERVICE_NAME)
     @:
 
 test:
-	docker run $(IMAGE)
+	docker run $(IMAGE):$(filter-out $@,$(MAKECMDGOALS))
 
 image:
 	docker build -t $(IMAGE):$(filter-out $@,$(MAKECMDGOALS)) $(DOCKER_FILE)
