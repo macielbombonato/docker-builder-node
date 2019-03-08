@@ -7,44 +7,24 @@ env:
   global:
     DOCKER_IMAGE=docker-builder-node
     DOCKER_FILE=.
+    VERSION=$TRAVIS_BRANCH
 
 jobs:
   include:
     - stage: build docker image
       script:
-      - if [ "$TRAVIS_BRANCH" = "master" ]; then 
-        VERSION=latest;
-      else  
-        VERSION=$TRAVIS_BRANCH;
-      fi
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
       - docker images
     - stage: test
       script: 
-      - if [ "$TRAVIS_BRANCH" = "master" ]; then 
-        VERSION=latest;
-      else  
-        VERSION=$TRAVIS_BRANCH;
-      fi
       - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
     - stage: tag image
       script: 
-      - if [ "$TRAVIS_BRANCH" = "master" ]; then 
-        VERSION=latest;
-      else  
-        VERSION=$TRAVIS_BRANCH;
-      fi
       - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
     - stage: push image
       script: 
-      - if [ "$TRAVIS_BRANCH" = "master" ]; then 
-        VERSION=latest;
-      else  
-        VERSION=$TRAVIS_BRANCH;
-      fi
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker push $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
-
 
 notifications:
   email: false
