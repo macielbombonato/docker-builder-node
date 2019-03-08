@@ -21,9 +21,6 @@ jobs:
       - docker images
       - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
       - docker push $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
-    - stage: test
-      script: docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
-    - script: docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
 
 notifications:
   email: false
