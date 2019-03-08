@@ -13,7 +13,7 @@ script:
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-  - make push-image ;
+  - make push-image $TRAVIS_BRANCH;
 
 notifications:
   email: false
