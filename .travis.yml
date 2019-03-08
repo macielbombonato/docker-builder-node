@@ -14,17 +14,17 @@ env:
 jobs:
   include:
     - stage: build docker image
-    script:
+      script:
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
       - docker images
     - stage: test
-    script: 
+      script: 
       - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
     - stage: tag image
-    script: 
+      script: 
       - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
     - stage: push image
-    script: 
+      script: 
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker push $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
 
