@@ -8,16 +8,12 @@ services:
 #    - master
   
 script:
-  - make image
-  - make test
+  - make image $TRAVIS_BRANCH
+  - make test $TRAVIS_BRANCH
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
   - make push-image ;
-#  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-#      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-#      make push-image ;
-#    fi
 
 notifications:
   email: false
