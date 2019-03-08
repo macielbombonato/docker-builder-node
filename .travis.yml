@@ -20,4 +20,4 @@ after_success:
 #    fi
 
 notifications:
-  email: true
+  email: false
