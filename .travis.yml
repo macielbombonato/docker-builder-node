@@ -1,10 +1,10 @@
 # make use of vm's 
-sudo: 'required'
+sudo: required
 
 # have the docker service set up (we'll
 # update it later)
 services:
-  - 'docker'
+  - docker
 
 branches:
   only:
