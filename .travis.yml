@@ -3,9 +3,9 @@ sudo: required
 services:
   - docker
 
-branches:
-  only:
-    - master
+#branches:
+#  only:
+#    - master
   
 script:
   - make image
