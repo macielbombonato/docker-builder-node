@@ -10,7 +10,9 @@ IMAGE := $(REPOSITORY_NAME)/$(SERVICE_NAME)
     @:
 
 all:
-	VERSION := `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
+	arg := `arg="$(filter-out $@,$(MAKECMDGOALS))" && echo $${arg:-${1}}`
+	echo $(arg)
+	VERSION := $(arg)
 
 test:
 	docker run $(IMAGE)
