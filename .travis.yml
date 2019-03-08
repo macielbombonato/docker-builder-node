@@ -7,13 +7,12 @@ env:
   global:
     DOCKER_IMAGE=docker-builder-node
     DOCKER_FILE=.
-
+    - if: $TRAVIS_BRANCH IN (master)
+      VERSION=latest
+    - if: $TRAVIS_BRANCH NOT IN (master)
+      VERSION=$TRAVIS_BRANCH
 jobs:
   include:
-    - if: $TRAVIS_BRANCH IN (master)
-      env: VERSION=latest
-    - if: $TRAVIS_BRANCH NOT IN (master)
-      env: VERSION=$TRAVIS_BRANCH
     - stage: build docker image
       - script:
         - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
