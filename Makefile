@@ -8,13 +8,10 @@ IMAGE := $(REPOSITORY_NAME)/$(SERVICE_NAME)
 %:
     @:
 
-test:
-	docker run $(IMAGE):$(filter-out $@,$(MAKECMDGOALS))
-
 image:
 	docker build -t $(IMAGE):$(filter-out $@,$(MAKECMDGOALS)) $(DOCKER_FILE)
 
 push-image:
 	docker push $(IMAGE):$(filter-out $@,$(MAKECMDGOALS))
 
-.PHONY: image test push-image 
+.PHONY: image push-image 
