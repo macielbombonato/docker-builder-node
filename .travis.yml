@@ -3,16 +3,23 @@ sudo: required
 services:
   - docker
 
-#branches:
-#  only:
-#    - master
-  
-script:
-  - make image $TRAVIS_BRANCH
+env:
+  global:
+    DOCKER_IMAGE=docker-builder-node
+    DOCKER_FILE=.
 
-after_success:
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-  - make push-image $TRAVIS_BRANCH;
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:${TRAVIS_BRANCH} ${DOCKER_FILE}
+      - docker images
+      - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/$DOCKER_IMAGE:$TRAVIS_BRANCH
+      - docker push $DOCKER_USERNAME/$DOCKER_IMAGE:$TRAVIS_BRANCH
+    - stage: test
+      script: docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$TRAVIS_BRANCH
+    - script: docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$TRAVIS_BRANCH
 
 notifications:
   email: false
