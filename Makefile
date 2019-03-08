@@ -13,10 +13,7 @@ test:
 	docker run $(IMAGE)
 
 image:
-	arg := "$(filter-out $@,$(MAKECMDGOALS))"
-	echo $(arg)
-	VERSION := $(arg)
-	docker build -t $(IMAGE):$(VERSION) $(DOCKER_FILE)
+	docker build -t $(IMAGE):"$(filter-out $@,$(MAKECMDGOALS))" $(DOCKER_FILE)
 
 push-image:
 	docker push $(IMAGE)
