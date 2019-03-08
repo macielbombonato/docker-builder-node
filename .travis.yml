@@ -9,7 +9,6 @@ services:
   
 script:
   - make image $TRAVIS_BRANCH
-  - make test $TRAVIS_BRANCH
 
 after_success:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
