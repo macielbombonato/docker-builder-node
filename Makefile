@@ -1,6 +1,5 @@
 REPOSITORY_NAME := macielbombonato
 SERVICE_NAME := docker-builder-node
-VERSION := latest
 
 DOCKER_FILE := .
 
