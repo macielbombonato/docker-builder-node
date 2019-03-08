@@ -1,8 +1,6 @@
 # docker-builder-node
 
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT)
-
-[![Build Status](https://travis-ci.org/macielbombonato/docker-builder-node.svg?branch=master)](https://travis-ci.org/macielbombonato/docker-builder-node)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://opensource.org/licenses/MIT) | [![Build Status](https://travis-ci.org/macielbombonato/docker-builder-node.svg?branch=master)](https://travis-ci.org/macielbombonato/docker-builder-node)
   
 ---  
   
