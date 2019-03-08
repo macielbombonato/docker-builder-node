@@ -15,6 +15,6 @@ image:
 	docker build -t $(IMAGE):$(filter-out $@,$(MAKECMDGOALS)) $(DOCKER_FILE)
 
 push-image:
-	docker push $(IMAGE)
+	docker push $(IMAGE):$(filter-out $@,$(MAKECMDGOALS))
 
 .PHONY: image test push-image 
