@@ -12,10 +12,12 @@ script:
   - make test
 
 after_success:
-  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-      make push-image ;
-    fi
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+  - make push-image ;
+#  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+#      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+#      make push-image ;
+#    fi
 
 notifications:
   email: true
