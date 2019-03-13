@@ -13,18 +13,24 @@ jobs:
   include:
     - stage: build docker image
       script:
+      - echo " --> Selecting the right version"
       - if [ $TRAVIS_BRANCH == "master" ]; then
           VERSION="latest";
         fi
+      - echo " ===> Building image"
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
-      - docker tag $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
+      - echo " ===> Image list"
       - docker images
     - stage: push image
       script: 
       - if [ $TRAVIS_BRANCH == "master" ]; then
           VERSION="latest";
         fi
+      - echo " ===> TAGing image"
+      - docker tag $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
+      - echo " ===> Authentication"
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - echo " ===> Pushing image"
       - docker push $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
 
 notifications:
