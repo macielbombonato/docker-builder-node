@@ -13,13 +13,16 @@ jobs:
   include:
     - stage: build docker image
       script:
+      - if [ $TRAVIS_BRANCH == "master" ]; then
+          VERSION="latest";
+        fi
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
       - docker images
-    - stage: tag image
-      script: 
-      - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
     - stage: push image
       script: 
+      - if [ $TRAVIS_BRANCH == "master" ]; then
+          VERSION="latest";
+        fi
       - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       - docker push $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
 
