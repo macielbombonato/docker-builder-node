@@ -17,6 +17,7 @@ jobs:
           VERSION="latest";
         fi
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
+      - docker tag $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
       - docker images
     - stage: push image
       script: 
