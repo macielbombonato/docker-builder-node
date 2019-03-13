@@ -15,9 +15,6 @@ jobs:
       script:
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
       - docker images
-    - stage: test
-      script: 
-      - docker run --rm $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
     - stage: tag image
       script: 
       - docker tag travis-ci-build-stages-demo $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
