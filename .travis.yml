@@ -5,7 +5,6 @@ services:
 
 env:
   global:
-    DOCKER_IMAGE=docker-builder-node
     DOCKER_FILE=.
     VERSION=$TRAVIS_BRANCH
 
