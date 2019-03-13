@@ -17,15 +17,18 @@ jobs:
       - if [ $TRAVIS_BRANCH == "master" ]; then
           VERSION="latest";
         fi
+      - echo " --> VERSION: " $VERSION
       - echo " ===> Building image"
       - docker build -t $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION $DOCKER_FILE
       - echo " ===> Image list"
       - docker images
     - stage: push image
       script: 
+      - echo " --> Selecting the right version"
       - if [ $TRAVIS_BRANCH == "master" ]; then
           VERSION="latest";
         fi
+      - echo " --> VERSION: " $VERSION
       - echo " ===> TAGing image"
       - docker tag $DOCKER_USERNAME/$DOCKER_IMAGE:$VERSION
       - echo " ===> Authentication"
