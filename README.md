@@ -11,3 +11,5 @@ Cada projeto deverá ter sua particularidade no processo de build, para esses ca
 O ponto de partida desta imagem base é: **macielbombonato/docker-builder**
 
 ---
+
+Para acessar o hub da imagem [clique aqui](https://hub.docker.com/r/macielbombonato/docker-builder-node).
